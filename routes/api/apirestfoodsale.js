@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   res.status(200).json({
-  	msn : "hola como estas llllllhhhh"
+  	msn : "hola"
   });
 });
 
