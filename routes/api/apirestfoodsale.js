@@ -7,4 +7,5 @@ router.get('/', function(req, res, next) {
   	msn : "ok"
   });
 });
+
 module.exports = router;
