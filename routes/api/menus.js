@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 //RUTASDEMODELS
-const Usuario = require('../../database/models/usuario') //ruta-usuario
-//GETusuario
+const Menufood = require('../../database/models/menu') //ruta-menu
+//GETmenu
 router.get('/', function (req, res, next) {
-    Usuario.find().exec()
+    Menufood.find().exec()
         .then(docs => {
             if (docs.length == 0) {
                 res.json({
-                    message: "NO hay usuarios en la BD"
+                    message: "NO hay menus en la BD"
                 })
             } else {
                 res.json({
@@ -26,28 +26,27 @@ router.get('/', function (req, res, next) {
             });
         });
 });
-//POSTusuario
-/* save users. */
+//POSTmenu
+/* save menus. */
 router.post('/', function (req, res, next) {
 
-    let usuarioData = {
+    let menuData = {
+        //restaurant: req.body.restaurant,
         nombre: req.body.nombre,
-        ci: req.body.ci,
-        email: req.body.email,
-        password: req.body.password,
-        telefono: req.body.telefono,
-        log: req.body.log, //cadena
-        lat: req.body.lat,
-        foto: req.body.foto,
+        precio: req.body.precio,
+        descripcion: req.body.descripcion,
+        
+        
+        //foto: req.body.foto,
     }
 
-    let data = new Usuario(usuarioData);
+    let data = new Menufood(menuData);
 
     data.save()
         .then(docs => {
             console.log(res);
             res.json({
-                message: "usuario guardado",
+                message: "menu guardado",
                 doc: docs
             })
         }).catch(err => {
@@ -57,15 +56,16 @@ router.post('/', function (req, res, next) {
             });
         });
 });
-//PATCHusuario
+
+//PATCHmenu
 router.patch('/:id', function (req, res, next) {
-    let idUser = req.params.id;
-    let userData = {};
+    let idMenufood= req.params.id;
+    let menuData = {};
     Object.keys(req.body).forEach((key) => {
-        userData[key] = req.body[key];
+        menuData[key] = req.body[key];
     })
 
-    Usuario.findByIdAndUpdate(idUser, userData).exec((err, result) => {
+    Menufood.findByIdAndUpdate(idMenufood, menuData).exec((err, result) => {
         if (err) {
             res.status(500).json({
                 error: err
@@ -80,12 +80,12 @@ router.patch('/:id', function (req, res, next) {
         }
     })
 });
-//DELETEusuario
+//DELETEmenu
 router.delete('/:id', function (req, res, next) {
-    let idUser = req.params.id;
+    let idMenufood = req.params.id;
 
-    Usuario.remove({
-        _id: idUser
+    Menufood.remove({
+        _id: idMenufood
     }).exec((err, result) => {
         if (err) {
             res.status(500).json({

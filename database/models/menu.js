@@ -2,18 +2,25 @@ const mongoose = require('../connect');
 const Schema = mongoose.Schema;
 
 const menufoodSchema = Schema({
+    restaurant: {
+        type:Schema.Types.ObjectId,
+        ref:"Restaurant"
+    },
     nombre: String,
-    precio: String,
+    precio: {
+        type:Number,
+        default:1
+    },
     descripcion: String,
     fechaRegistro:
     {
         type: Date,
         default: Date.now()
     },
-    fotoproducto: String
+    fotomenu: String
     //tipo de usuario
 })
 
-const menus = mongoose.model('Menufood', menufoodSchema);
+const menu = mongoose.model('Menufood', menufoodSchema);
 
-module.exports = menus;
+module.exports = menu;
