@@ -31,13 +31,11 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     let menuData = {
-        //restaurant: req.body.restaurant,
+        restaurant: req.body.restaurant,
         nombre: req.body.nombre,
         precio: req.body.precio,
         descripcion: req.body.descripcion,
-        
-        
-        //foto: req.body.foto,
+        foto: req.body.foto,
     }
 
     let data = new Menufood(menuData);

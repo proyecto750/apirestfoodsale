@@ -38,8 +38,8 @@ router.post('/', function (req, res, next) {
         telefono: req.body.telefono,
         log: req.body.log, //cadena
         lat: req.body.lat,
-       // logo:req.body.logo,
-       // fotoLugar: req.body.fotoLugar,
+       logo:req.body.logo,
+       fotoLugar: req.body.fotoLugar,
 
 
     }

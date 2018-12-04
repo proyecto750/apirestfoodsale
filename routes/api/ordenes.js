@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
         });
 });
 //POSTordenes
-/* save ordenes. aun no probado por postam por que necesita testeo*/
+/* save ordenes*/
 router.post('/', function (req, res, next) {
 
     const datos = {
