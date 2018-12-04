@@ -28,43 +28,87 @@ router.get('/', function (req, res, next) {
 });
 //POSTordenes
 /* save ordenes. aun no probado por postam por que necesita testeo*/
-/*router.post('/', function (req, res, next) {
+router.post('/', function (req, res, next) {
 
-    let ordenData = {
+    const datos = {
         cliente: req.body.idCliente,
         lugarEnvio: req.body.lugarEnvio,
         restaurant:req.body.idRestaurant,
-        menus:req.body.menus,
-        cantidad: req.body.cantidad,
-        precios:req.body.precios,
-    }
-    
+        menus  :req.body.menus,
+        cantidad : req.body.cantidad,
+        precios : req.body.precios,
+    };
+
     let precios = req.body.precios;
     let cantidad = req.body.cantidad;
+
     let pagoTotal = 0;
-    for (let index = 0; index < precios.length; index++){
-        pagoTotal += precios[index]* cantidad[index];
-    } 
-    datos.menus = menus;
+    for (let index = 0; index < precios.length ; index++){
+        pagoTotal += precios[index]*cantidad[index];
+    };
+
     datos.cantidad = cantidad;
     datos.pagoTotal = pagoTotal;
-    
-   
-    let data = new Orden(ordenData);
-    data.save()
-        .then(docs => {
-            console.log(res);
-            res.json({
-                message: "restaurante  guardado",
-                doc: docs
+
+
+    var modelOrden = new Orden(datos);
+    modelOrden.save()
+        .then(res.json({
+                message: "Orden insertado "
+
             })
-        }).catch(err => {
-            console.log(err)
+        ).catch(err => {
+
             res.status(500).json({
                 error: err
-            });
+            })
         });
 });
 
-*/
+//DELETEmenu
+router.delete('/:id', function (req, res, next) {
+    let idOrden = req.params.id;
+
+    Orden.remove({
+        _id: idOrden
+    }).exec((err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err
+            });
+            return;
+        }
+        if (result) {
+            res.status(200).json({
+                message: "Orden eliminado eliminado",
+                result: result
+            })
+        }
+    })
+});
+
+
+router.patch('/:id', function (req, res, next) {
+    let idOrden = req.params.id;
+    let ordenData = {};
+    Object.keys(req.body).forEach((key) => {
+        ordenData[key] = req.body[key];
+    })
+
+    Orden.findByIdAndUpdate(idOrden, ordenData).exec((err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err
+            });
+            return;
+        }
+        if (result) {
+            res.status(200).json({
+                message: "Se actualizaron los datos"
+
+            })
+        }
+    })
+});
+
 module.exports = router;

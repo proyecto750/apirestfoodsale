@@ -41,7 +41,7 @@ router.post('/', function (req, res, next) {
        // logo:req.body.logo,
        // fotoLugar: req.body.fotoLugar,
 
-        
+
     }
 
     const data = new Restaurant(restaurantData);
@@ -58,6 +58,51 @@ router.post('/', function (req, res, next) {
                 error: err
             });
         });
+});
+
+router.delete('/:id', function (req, res, next) {
+    let idRestaurant = req.params.id;
+
+    Restaurant.remove({
+        _id: idRestaurant
+    }).exec((err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err
+            });
+            return;
+        }
+        if (result) {
+            res.status(200).json({
+                message: "Usuario eliminado",
+                result: result
+            })
+        }
+    })
+});
+
+
+router.patch('/:id', function (req, res, next) {
+    let idRestaurant = req.params.id;
+    let restaurantData = {};
+    Object.keys(req.body).forEach((key) => {
+        restaurantData[key] = req.body[key];
+    })
+
+    Restaurant.findByIdAndUpdate(idRestaurant, restaurantData).exec((err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err
+            });
+            return;
+        }
+        if (result) {
+            res.status(200).json({
+                message: "Se actualizaron los datos"
+
+            })
+        }
+    })
 });
 
 module.exports = router;

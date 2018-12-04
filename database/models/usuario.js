@@ -7,8 +7,8 @@ const usuarioSchema = Schema({
     email: String,
     password: String,
     telefono: Number,
-    log: Number,
-    lat: Number,
+    log: String,
+    lat: String,
     fechaRegistro: {
         type: Date,
         default: Date.now()

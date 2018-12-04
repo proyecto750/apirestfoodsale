@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
         email: req.body.email,
         password: req.body.password,
         telefono: req.body.telefono,
-        log: req.body.log, //cadena
+        log: req.body.log,
         lat: req.body.lat,
         foto: req.body.foto,
     }
