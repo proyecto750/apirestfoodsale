@@ -30,6 +30,43 @@ router.get('/', function (req, res, next) {
 /* save users. */
 router.post('/', function (req, res, next) {
 
+    /*var data1 = req.body;
+    console.log(data1);
+    var nombre_reg = /\w{3,}/g
+    var email_reg = /\w{1,}@{\w.}{1,}[.]{\w}{2,3}/g
+    var password_reg = /\w{6,}/g
+
+    if(data.nombre.match(nombre_reg) == null) {
+        res.status(300).json({
+            msns: "su nombre de usuario no corresponde a nuestra validacion "
+        });
+      return;
+    }
+    if(data.email.match(email_reg) == null) {
+        res.status(300).json({
+            msns: "su email de usuario no corresponde a nuestra validacion "
+        });
+     return;
+    }
+    if(data.password.match(password_reg) == null) {
+        res.status(300).json({
+            msns: "su password de usuario no corresponde a nuestra validacion "
+        });
+     return;
+    }
+*/
+
+
+    if (req.body.email == "" && req.body.password == "") {
+        res.status(400).json({
+          "msn" : "formato incorrecto"
+        });
+        return;
+    }
+
+    
+
+
     let usuarioData = {
         nombre: req.body.nombre,
         ci: req.body.ci,
