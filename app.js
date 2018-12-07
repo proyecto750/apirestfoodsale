@@ -10,6 +10,7 @@ var  usuarios = require('./routes/api/apirestfoodsale');
 var  menus = require('./routes/api/menus');
 var  ordenes = require('./routes/api/ordenes');
 var  restaurantesfood = require('./routes/api/restaurantes');
+var  user = require('./routes/api/userss');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/apirestfoodsale', usuarios);
 app.use('/menus', menus);
 app.use('/ordenes', ordenes);
 app.use('/restaurantes', restaurantesfood);
+app.use('/userss', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
