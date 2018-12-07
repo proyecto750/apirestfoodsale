@@ -4,27 +4,20 @@ var router = express.Router();
 const Restaurant = require('../../database/models/restaurant') //ruta-restaurant
 //GETrestaurant
 router.get('/', function (req, res, next) {
-    Restaurant.find().exec()
-        .then(docs => {
-            if (docs.length == 0) {
-                res.json({
-                    message: "NO hay restaurant en la BD"
-                })
-            } else {
-                res.json({
-                    count: docs.length,
-                    result: docs,
-                    request: {
-                        type: "GET"
-                    }
-
-                })
-            }
-        }).catch(err => {
-            res.status(500).json({
-                error: err
-            });
+    Restaurant.find().populate('propietario', '-__v').exec().then(docs => {
+        if (docs.length == 0) {
+            res.json({
+                message: "No se encontro en la base de datos"
+            })
+        } else {
+            res.json(docs);
+        }
+    }).catch(err => {
+        res.json({
+            error: err
         });
+    })
+
 });
 //POSTrestaurant
 /* save restaurant. */

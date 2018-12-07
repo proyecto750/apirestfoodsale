@@ -18,7 +18,7 @@ const menufoodSchema = Schema({
         default: Date.now()
     },
     fotomenu: String
-    //tipo de usuario
+    
 })
 
 const menu = mongoose.model('Menufood', menufoodSchema);

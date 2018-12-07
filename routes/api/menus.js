@@ -59,6 +59,7 @@ router.post('/', function (req, res, next) {
 router.patch('/:id', function (req, res, next) {
     let idMenufood= req.params.id;
     let menuData = {};
+
     Object.keys(req.body).forEach((key) => {
         menuData[key] = req.body[key];
     })
@@ -93,7 +94,7 @@ router.delete('/:id', function (req, res, next) {
         }
         if (result) {
             res.status(200).json({
-                message: "Usuario eliminado",
+                message: "Menu eliminado",
                 result: result
             })
         }
