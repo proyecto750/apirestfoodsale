@@ -10,7 +10,9 @@ var  usuarios = require('./routes/api/apirestfoodsale');
 var  menus = require('./routes/api/menus');
 var  ordenes = require('./routes/api/ordenes');
 var  restaurantesfood = require('./routes/api/restaurantes');
-var  user = require('./routes/api/userss');
+var  user = require('./routes/api/login');
+var  detalle = require('./routes/api/detalle');
+//var  uploadimg = require('./routes/api/uploadimg');
 
 var app = express();
 
@@ -30,7 +32,9 @@ app.use('/apirestfoodsale', usuarios);
 app.use('/menus', menus);
 app.use('/ordenes', ordenes);
 app.use('/restaurantes', restaurantesfood);
-app.use('/userss', user);
+app.use('/login', user);
+app.use('/detalle', detalle);
+//app.use('/uploadimg', uploadimg);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,7 +52,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var port = 9999;
+var port = 8888;
 app.listen(port, () =>{
 console.log("Corriendo en el puerto " + port)
 });

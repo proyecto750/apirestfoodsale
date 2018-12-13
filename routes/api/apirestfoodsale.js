@@ -8,36 +8,6 @@ const hash = require("hash");
 //RUTASDEMODELS
 const Usuario = require('../../database/models/usuario') //ruta-usuario
 
-/* 
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const storage = multer.diskStorage({
-    destination: function (res, file, cb) {
-        try {
-            fs.statSync('./uploads/');
-        } catch (e) {
-            fs.mkdirSync('./uploads/');
-        }
-        cb(null, './uploads/');
-    },
-    filename: (res, file, cb) => {
-        cb(null, 'IMG-' + Date.now() + path.extname(file.originalname))
-    }
-})
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
-        return cb(null, true);
-    }
-    return cb(new Error('Solo se admiten imagenes png y jpg jpeg'));
-} 
-const upload = multer({
-    storage: storage,
-    fileFilter: fileFilter,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    }
-})*/
 
 //GETusuario
 router.get('/', function (req, res, next) {
@@ -68,12 +38,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
 
-    if (req.body.email == "" && req.body.password == "") {
-        res.status(400).json({
-          "msn" : "formato incorrecto"
-        });
-        return;
-    }
+    
 
     let usuarioData = {
         nombre: req.body.nombre,

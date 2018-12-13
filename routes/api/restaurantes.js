@@ -23,6 +23,9 @@ router.get('/', function (req, res, next) {
 /* save restaurant. */
 router.post('/', function (req, res, next) {
 
+  
+
+
     let restaurantData = {
         nombre: req.body.nombre,
         nit: req.body.nit,

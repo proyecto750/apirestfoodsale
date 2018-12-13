@@ -25,6 +25,8 @@ router.get('/', function (req, res, next) {
 //POST................................................................................//
 router.post('/', function (req, res, next) {
 
+  
+
 
     const datos = {
         cliente: req.body.idCliente,
@@ -123,14 +125,14 @@ router.get('/facturas/:id', function (req, res, next) {
     Orden.findById(req.params.id).populate('restaurant').populate('menus').populate('cliente').exec()
         .then(doc => {
 
-            // Create a document 
+            // Create a document
 
             pdf = new PDFDocument
 
             let idOrden = req.params.id;
             let writeStream = fs.createWriteStream(idOrden + '.pdf');
             pdf.pipe(writeStream);
-            // Add another page 
+            // Add another page
 
             pdf
                 .fontSize(20)
@@ -224,7 +226,7 @@ router.get('/facturas/:id', function (req, res, next) {
                 align: 'center'
             })
             pdf.moveDown()
-            // Finalize PDF file 
+            // Finalize PDF file
             pdf.end()
             //pdf.pipe(res.status(201));
 
@@ -272,7 +274,7 @@ router.get('/facturas/:id', function (req, res, next) {
                         pdf = new PDFDocument;
                         let writeStreamG = fs.createWriteStream(idOrden + '.pdf');
                         pdfg.pipe(writeStreamG);
-                       
+
                         pdfg.fontSize(20)
                             .text('Id de  : ' + idOrden, 100, 100)
                             .moveDown()
